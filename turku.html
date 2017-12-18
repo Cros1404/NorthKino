@@ -626,12 +626,27 @@
 </body>
 <script src="TweenMax.min.js.download"></script>
 <script>
+    var boxNode = document.getElementById("box"),
+        lastButton = "",
+        payNode = document.getElementById("pay-node"), // dropdown content node
+        movedNode = document.getElementById("moved-node"),
+        confirmNode = document.getElementById("confirm-node"),  
+        payTitle = document.getElementById("pay-title"),
+        selType = document.getElementById("seltype"),
+        selNumber = document.getElementById("selnumber"),
+        black = document.getElementById("black"),
+        confirmActive = false,
+        confirmTitle = document.getElementById("confirm-title"),
+        payTitle = document.getElementById("pay-title"),
+        confirmTime = document.getElementById("confirm-time"),
+        calculation = document.getElementById("calculation");
+
     window.onload = function () {
         TweenLite.to(document.getElementById("head"), // element
             .7,   // duration
             {   // tween parameters
                 opacity: 1,
-                left: "0px"
+                x: 50
             });
 
         TweenLite.from(document.querySelectorAll(".mov"), // elements
@@ -646,31 +661,21 @@
                 opacity: 1
             });
 
+        var buttons = document.getElementsByClassName("btn"),
+            i,
+            l = buttons.length;
+
+        for (i = 0; i < l; i++) {
+            if (buttons[i].id != "buy" && buttons[i].id != "cancel" && buttons[i].id != "confirm")
+                buttons[i].addEventListener("click", function () {
+                    if (confirmActive)
+                        unextend()
+                    dropDown(this);
+                });
+        }
+
     }
 
-    var boxNode = document.getElementById("box"),
-        buttons = document.getElementsByClassName("btn"),
-        lastButton = "",
-        payNode = document.getElementById("pay-node"), // dropdown content node
-        movedNode = document.getElementById("moved-node"),
-        style = window.getComputedStyle(payNode),
-        oldTop = style.getPropertyValue('top'),
-        newTop = oldTop.slice(0, -2) - - 120 + "px",
-        payTitle = document.getElementById("pay-title"),
-        selType = document.getElementById("seltype"),
-        selNumber = document.getElementById("selnumber"),
-        i,
-        l = buttons.length,
-        confirmActive = false;
-
-    for (i = 0; i < l; i++) {
-        if (buttons[i].id != "buy" && buttons[i].id != "cancel" && buttons[i].id != "confirm")
-            buttons[i].addEventListener("click", function () {
-                if (confirmActive)
-                    unextend()
-                dropDown(this);
-            });
-    }
 
     function dropDown(x) {
 
@@ -682,7 +687,7 @@
             TweenLite.to(payNode, // element
                 .1,   // duration
                 {   // tween parameters
-                    top: oldTop
+                    y: 0
                 });
             TweenLite.to(movieNode, // element
                 .1,   // duration
@@ -703,8 +708,8 @@
             lastButton.style.backgroundColor = "";
 
         // animate the content of pay dropdown
-        timeline.add(TweenLite.to(payNode, .1, { top: oldTop }))
-            .add(TweenLite.to(payNode, .75, { top: newTop, ease: Bounce.easeOut }));
+        timeline.add(TweenLite.to(payNode, .1, { y: 0 }))
+            .add(TweenLite.to(payNode, .75, { y: 120, ease: Bounce.easeOut }));
 
         // animate height of old  movie box
         TweenLite.to(payNode.parentNode.parentNode.parentNode, // element
@@ -756,20 +761,15 @@
         };
     function extend(x) {
         confirmActive = true;
-        var confirmNode = document.getElementById("confirm-node"),
-            movieNode = confirmNode.parentNode.parentNode.parentNode;
+        var total,
+            type = selType.value,
+            number = selNumber.value,
+            movieNode = confirmNode.parentNode.parentNode.parentNode,
+            time = payTitle.innerHTML.slice(-5);;
 
         x.style.backgroundColor = "rgb(0, 184, 0)";
-
-        document.getElementById("confirm-title").innerHTML =
-            document.getElementById("pay-title").innerHTML.slice(0, -5);
-
-        var time = document.getElementById("pay-title").innerHTML.slice(-5);
-        document.getElementById("confirm-time").innerHTML = time;
-
-        var total = 0,
-            type = document.getElementById("seltype").value,
-            number = document.getElementById("selnumber").value;
+        confirmTitle.innerHTML = payTitle.innerHTML.slice(0, -5);
+        confirmTime.innerHTML = time;
 
         if ((time.slice(0, 2) < 17) ||
             ((time.slice(0, 2) == "17") && (time.slice(3) == "00")))
@@ -777,7 +777,7 @@
         else
             total = (pricesAfterFive[type] * number).toFixed(2).replace(".", ",");
 
-        document.getElementById("calculation").innerHTML = type + " x " +
+        calculation.innerHTML = type + " x " +
             number + " = <strong>" + total + " €</strong>";
 
         TweenLite.to(movieNode, // element
@@ -789,22 +789,22 @@
         TweenLite.to(confirmNode, // element
             .75,   // duration
             {   // tween parameters
-                left: "0x"
+                x: 350
             });
 
         TweenLite.to(boxNode, // element
             .75,   // duration
             {   // tween parameters
-                left: "5%"
+                x: -925
             });
 
-        var black = document.getElementById("black");
         black.style.zIndex = 1;
 
         TweenLite.to(black, // element
             .75,   // duration
             {   // tween parameters
-                opacity: "0.5"
+                opacity: "0.5",
+                delay: .75
             });
 
         movieNode.style.zIndex = 2;
@@ -813,21 +813,20 @@
 
     function unextend() {
         confirmActive = false;
-        var confirmNode = document.getElementById("confirm-node"),
-            movieNode = confirmNode.parentNode.parentNode.parentNode;
+        var movieNode = confirmNode.parentNode.parentNode.parentNode;
 
         document.getElementById("buy").style = "unset";
 
         TweenLite.to(confirmNode, // element
             .75,   // duration
             {   // tween parameters
-                left: "-349.334px"
+                x: 0
             });
 
         TweenLite.to(boxNode, // element
             .75,   // duration
             {   // tween parameters
-                left: "50%"
+                x: -375
             });
 
         TweenLite.to(movieNode, // element
@@ -836,13 +835,11 @@
                 width: "100%"
             });
 
-        var black = document.getElementById("black");
-
-
         TweenLite.to(black, // element
             .75,   // duration
             {   // tween parameters
                 opacity: "0",
+                delay: .75,
                 onComplete: function () {
                     black.style.zIndex = "unset";
                     movieNode.style.zIndex = "unset";
@@ -850,5 +847,6 @@
             });
     }
 </script>
+
 
 </html>
