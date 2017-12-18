@@ -57,8 +57,8 @@
         min-width: 100px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
-        top: -250px;
-        transition: top .5s;
+        transform: translateY(-100%);
+        transition: transform .5s;
     }
 
     .dropdown-content a {
@@ -78,7 +78,7 @@
 
 
     .dropdown:hover .dropdown-content {
-        top: 50px;
+        transform: translateY(0%);
     }
 
     #logo {
@@ -99,7 +99,8 @@
         left: 50%;
         width: 750px;
         -ms-transform: translate(-50%, 0%);
-        transform: translate(-50%, 0%);
+        transform: translateX(-50%);
+        transition: transform .75s;
     }
 
     #head {
@@ -109,7 +110,7 @@
         text-align: center;
         font-size: 200%;
         border-bottom: 1px solid;
-        width: 50%;
+        width: 60%;
         padding-bottom: 20px;
         margin: auto;
         margin-top: 50px;
@@ -145,7 +146,9 @@
         inset 0px 0px 20px white;
         margin-bottom: 20px;
         opacity: 0;
-        /* width: 1100px; */
+        transform: scale(.5, .5);
+        transition: transform .5s, opacity .5s, width .75s;
+        width: 100%;
     }
 
     .mov-info {
@@ -285,6 +288,7 @@
         padding: 30px 35px;
         left: -349.334px;
         z-index: 0;
+        transition: transform .75s;
     }
 
     #confirm-title {
@@ -401,6 +405,7 @@
         height: 2500px;
         background-color: black;
         opacity: 0;
+        transition: opacity .75s;
     }
 </style>
 
@@ -422,8 +427,8 @@
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn">Movies</a>
             <div class="dropdown-content">
-                <a href="oulu.html">Oulu</a>
-                <a href="helsinki.html" class="active">Helsinki</a>
+                <a href="oulu.html" class="active">Oulu</a>
+                <a href="helsinki.html">Helsinki</a>
                 <a href="turku.html">Turku</a>
                 <a href="tampere.html">Tampere</a>
                 <a href="rovaniemi.html">Rovaniemi</a>
@@ -649,18 +654,6 @@
                 x: 50
             });
 
-        TweenLite.from(document.querySelectorAll(".mov"), // elements
-            .5,   // duration
-            {    // tween parameters
-                scale: .5
-            });
-
-        TweenLite.to(document.querySelectorAll(".mov"), // elements
-            .5,   // duration
-            {    // tween parameters
-                opacity: 1
-            });
-
         var buttons = document.getElementsByClassName("btn"),
             i,
             l = buttons.length;
@@ -672,6 +665,14 @@
                         unextend()
                     dropDown(this);
                 });
+        }
+
+        var movies = document.getElementsByClassName("mov");
+        l = movies.length;
+
+        for (i = 0; i < l; i++) {
+            movies[i].style.opacity = 1;
+            movies[i].style.transform = "scale(1, 1)";
         }
 
     }
@@ -760,8 +761,6 @@
             "2 adults + 2 kids": 17.50
         };
 
-    black.style.opacity = 0;
-
     function extend(x) {
         confirmActive = true;
         var total,
@@ -783,23 +782,11 @@
         calculation.innerHTML = type + " x " +
             number + " = <strong>" + total + " €</strong>";
 
-        TweenLite.to(movieNode, // element
-            .75,   // duration
-            {   // tween parameters
-                width: "1100px"
-            });
+        movieNode.style.width = "1100px";
 
-        TweenLite.to(confirmNode, // element
-            .75,   // duration
-            {   // tween parameters
-                x: 350
-            });
+        confirmNode.style.transform = "translateX(100%)";
 
-        TweenLite.to(boxNode, // element
-            .75,   // duration
-            {   // tween parameters
-                x: -925
-            });
+        boxNode.style.transform = "translateX(-125%)";
 
         black.style.zIndex = 1;
         black.style.opacity = 0.5;
@@ -814,23 +801,11 @@
 
         document.getElementById("buy").style = "unset";
 
-        TweenLite.to(confirmNode, // element
-            .75,   // duration
-            {   // tween parameters
-                x: 0
-            });
+        confirmNode.style.transform = "translateX(0%)";
 
-        TweenLite.to(boxNode, // element
-            .75,   // duration
-            {   // tween parameters
-                x: -375
-            });
+        boxNode.style.transform = "translateX(-50%)";
 
-        TweenLite.to(movieNode, // element
-            .75,   // duration
-            {   // tween parameters
-                width: "100%"
-            });
+        movieNode.style.width = "100%";
 
         black.style.opacity = 0;
 
