@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<script src="TweenMax.min.js.download"></script>
+<script>
+    window.onload = function () {
+        TweenLite.to(document.getElementById("head"), // element
+            .5,   // duration
+            {   // tween parameters
+                opacity: 1,
+                left: "0"
+            });
+
+        TweenLite.to(document.getElementById("prices"), // elements
+            .5,   // duration
+            {    // tween parameters
+                opacity: 1
+            });
+
+        TweenLite.from(document.getElementById("prices"), // elements
+            .5,   // duration
+            {    // tween parameters
+                scale: 0.5
+            });
+    }
+</script>
+<style>
+    * {
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    body {
+        font-family: sans-serif;
+        margin: 0;
+        background-color: #B82601;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+        position: unset;
+    }
+
+    li {
+        float: left;
+        position: unset;
+    }
+
+    li a,
+    .dropbtn {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: all .2s;
+    }
+
+    li a:hover:not(.active),
+    .dropdown:hover .dropbtn {
+        background-color: rgb(2, 26, 43);
+        transition: all .3s;
+    }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: block;
+        position: absolute;
+        background-color: black;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        top: -250px;
+        transition: top .5s;
+    }
+
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    li:not(.dropdown),
+    .dropbtn {
+        position: relative;
+        z-index: 2;
+        background-color: black;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+        top: 50px;
+    }
+
+    #logo:hover {
+        background-color: black;
+    }
+
+    .active {
+        background-color: #062F4F;
+    }
+
+    #box {
+        margin: auto;
+        width: 60%;
+        text-align: center;
+        position: relative;
+    }
+
+    #head {
+        color: white;
+        text-align: left;
+        left: -50px;
+        opacity: 0;
+    }
+
+    #prices {
+        border-collapse: collapse;
+        width: 100%;
+        overflow: hidden;
+        opacity: 0;
+    }
+
+    #prices td,
+    #prices th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #prices tr {
+        background-color: white;
+    }
+
+    #prices tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #prices tr:hover {
+        background-color: #ddd;
+    }
+
+    #prices th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #062F4F;
+        color: white;
+    }
+</style>
+
+<head>
+    <title>NorthKino</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body id="body">
+    <ul>
+        <li>
+            <a href="#logo" id="logo">
+                <b>NorthKino</b>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Movies</a>
+            <div class="dropdown-content">
+                <a href="oulu.html">Oulu</a>
+                <a href="helsinki.html">Helsinki</a>
+                <a href="turku.html">Turku</a>
+                <a href="tampere.html">Tampere</a>
+                <a href="rovaniemi.html">Rovaniemi</a>
+            </div>
+        </li>
+        <li>
+            <a href="prices.html" class="active">Prices</a>
+        </li>
+    </ul>
+    <div id="box">
+        <h1 id="head">Prices</h1>
+        <hr>
+        <table id="prices">
+            <tr>
+                <th style="background:#B82601; border: none;"></th>
+                <th colspan="2">Monday-Thursday
+                    <br>
+                    <small>until 17:00</small>
+                </th>
+                <th colspan="2">Monday-Thursday
+                    <br>
+                    <small>from 17:01</small>
+                </th>
+                <th colspan="2">Friday</th>
+            </tr>
+            <tr>
+                <th style="background:#B82601; border: none;"></th>
+                <th>2D</th>
+                <th>3D</th>
+                <th>2D</th>
+                <th>3D</th>
+                <th>2D</th>
+                <th>3D</th>
+            </tr>
+            <tr>
+                <td>Standard</td>
+                <td>6,60</td>
+                <td>7,60</td>
+                <td>7,30</td>
+                <td>8,30</td>
+                <td>7,90</td>
+                <td>8,90</td>
+            </tr>
+            <tr>
+                <td>Child
+
+                </td>
+                <td>4,90</td>
+                <td>5,90</td>
+                <td>4,90</td>
+                <td>5,90</td>
+                <td>5,20</td>
+                <td>6,20</td>
+            </tr>
+            <tr>
+                <td>Senior</td>
+                <td>4,50</td>
+                <td>5,60</td>
+                <td>4,50</td>
+                <td>5,60</td>
+                <td>4,50</td>
+                <td>5,60</td>
+            </tr>
+            <tr>
+                <td>Group</td>
+                <td>3,50</td>
+                <td>4,50</td>
+                <td>3,50</td>
+                <td>4,50</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Family ticket #1
+                    <br>
+                    <small>1 adult + 2 kids</small>
+                </td>
+                <td>15,50</td>
+                <td>18,00</td>
+                <td>16,20</td>
+                <td>19,00</td>
+                <td>17,30</td>
+                <td>20,20</td>
+            </tr>
+            <tr>
+                <td>Family ticket #2
+                    <br>
+                    <small>2 adults + 1 kid</small>
+                </td>
+                <td>19,60</td>
+                <td>22,00</td>
+                <td>20,60</td>
+                <td>24,10</td>
+                <td>22,70</td>
+                <td>26,00</td>
+            </tr>
+            <tr>
+                <td>Family ticket #3
+                    <br>
+                    <small>2 adults + 2 kids</small>
+                </td>
+                <td>16,00</td>
+                <td>18,30</td>
+                <td>17,50</td>
+                <td>19,50</td>
+                <td>18,50</td>
+                <td>21,00</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

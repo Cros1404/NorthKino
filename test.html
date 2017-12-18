@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<style>
+    * {
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    body {
+        margin: 0;
+        background-color: #B82601;
+        font-family: 'Open Sans', sans-serif;
+        width: 100%;
+        height: 2000px;
+        overflow-x: hidden;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+        position: unset;
+    }
+
+    li {
+        float: left;
+        position: unset;
+    }
+
+
+    li a,
+    .dropbtn {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: all .2s;
+    }
+
+    li a:hover:not(.active),
+    .dropdown:hover .dropbtn {
+        background-color: rgb(2, 26, 43);
+        transition: all .3s;
+    }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: block;
+        position: absolute;
+        background-color: black;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        top: -250px;
+        transition: top .5s;
+    }
+
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    li:not(.dropdown),
+    .dropbtn {
+        position: relative;
+        z-index: 2;
+        background-color: black;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+        top: 50px;
+    }
+
+    #logo {
+        font-weight: bold;
+    }
+
+    #logo:hover {
+        background-color: black;
+    }
+
+    .active {
+        background-color: #062F4F;
+    }
+
+    #box {
+        margin: 0;
+        position: absolute;
+        left: 50%;
+        width: 750px;
+        -ms-transform: translate(-50%, 0%);
+        transform: translate(-50%, 0%);
+    }
+
+    #head {
+        color: white;
+        left: -50px;
+        opacity: 0;
+        text-align: center;
+        font-size: 200%;
+        border-bottom: 1px solid;
+        width: 50%;
+        padding-bottom: 20px;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .btn {
+        background-color: #062F4F;
+        color: white;
+        width: fit-content;
+        padding: 5px;
+        transition: all .2s ease-in-out;
+        border-radius: 5px;
+        font-size: 130%;
+        float: left;
+        margin-right: 5px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), inset 0px 0px 5px white;
+    }
+
+    .btn:hover {
+        background-color: rgb(14, 99, 165);
+        cursor: pointer;
+    }
+
+    .mov {
+
+        margin: auto;
+        height: 340px;
+        overflow: hidden;
+        border-radius: 15px;
+        background: linear-gradient(white, rgb(212, 218, 221));
+        box-shadow: 10px 10px 5px black,
+        inset 0px 0px 20px white;
+        margin-bottom: 20px;
+        opacity: 0;
+        /* width: 1100px; */
+    }
+
+    .mov-info {
+        width: 750.666px;
+    }
+
+    .mov-whole {
+        width: 1100px;
+        height: 2000px;
+    }
+
+    img:not(.card-img) {
+        width: 226.666px;
+        height: 340.5px;
+        float: left;
+        z-index: 1;
+        border-radius: 0px;
+    }
+
+    h2 {
+        line-height: 0px;
+    }
+
+    .text {
+        width: 524px;
+        float: left;
+        padding: 20px;
+        padding-bottom: 22px;
+        border: solid grey .8px;
+        background: linear-gradient(white, rgb(212, 218, 221));
+        border-radius: 0 15px 15px 0;
+        z-index: 1;
+    }
+
+    .desc {
+        height: 140px;
+        font-size: 92%;
+        border-bottom: solid grey .8px;
+        padding-bottom: 155px;
+    }
+
+    .genre {
+        color: rgb(90, 90, 90);
+        border-bottom: solid grey .8px;
+        padding-bottom: 10px;
+    }
+
+    #pay-node {
+        top: -157px;
+        left: 1px;
+        z-index: 0;
+        display: block;
+        float: left;
+        border-bottom: solid grey .8px;
+        border-right: solid grey .8px;
+        border-radius: 0 0 15px 0;
+        padding-right: 7px;
+        padding-top: 30px;
+        background: linear-gradient(white, rgb(212, 218, 221));
+    }
+
+    #pay-info {
+        padding: 20px;
+        float: left;
+    }
+
+    select {
+        -webkit-appearance: button;
+        -webkit-border-radius: 2px;
+        -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+        -webkit-padding-end: 20px;
+        -webkit-padding-start: 2px;
+        -webkit-user-select: none;
+        background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+        background-position: 93% center;
+        background-repeat: no-repeat;
+        border: 1px solid #AAA;
+        color: #555;
+        font-size: inherit;
+        overflow: hidden;
+        padding: 5px 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fff;
+        background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#062F4F, #062F4F 40%, #062F4F);
+        background-color: #062F4F;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        padding-left: 15px;
+        width: 170px;
+    }
+
+    #selnumber {
+        width: 70px;
+        background-position: 80% center;
+    }
+
+    select:focus {
+        outline: 0;
+    }
+
+    #type {
+        float: left;
+        padding-right: 20px;
+        border-top: solid grey .8px;
+        padding-top: 10px;
+    }
+
+    #number {
+        padding-left: 20px;
+        float: left;
+        border-top: solid grey .8px;
+        padding-top: 10px;
+    }
+
+    #buy {
+        padding: 15px;
+        padding-left: 50px;
+        padding-right: 50px;
+        background-color: rgb(0, 134, 0);
+        font-size: 150%;
+    }
+
+    #buy-area {
+        float: left;
+        padding: 25px 15px 0px 15px;
+    }
+
+    #buy:hover {
+        background-color: rgb(0, 184, 0);
+    }
+
+    #confirm-node {
+        width: 349.334px;
+        float: right;
+        padding: 30px 35px;
+        left: -349.334px;
+        z-index: 0;
+    }
+
+    #confirm-title {
+        font-weight: bold;
+        font-style: oblique;
+    }
+
+    #confirm-time {
+        font-weight: bold;
+    }
+
+    input[type=text] {
+        width: 100%;
+        padding: 7px 10px;
+        margin: 8px 0;
+        display: inline-block;
+        border: .7px solid #ccc;
+        box-sizing: border-box;
+        font-size: 110%;
+    }
+
+    input[type=submit] {
+        float: left;
+        width: 55%;
+        background-color: rgb(0, 134, 0);
+        color: white;
+        padding: 10px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    input[type=submit]:hover {
+        background-color: rgb(0, 184, 0);
+    }
+
+    label {
+        font-size: 90%;
+    }
+
+    #card-number-group {
+        width: 71%;
+        float: left;
+    }
+
+    #ccv-group {
+        width: 20%;
+        float: left;
+        left: 9%;
+    }
+
+    #expiration-group {
+        float: left;
+        margin-bottom: 21px;
+        border-bottom: solid grey .8px;
+        padding-bottom: 10px;
+    }
+
+    #ccv {
+        display: block;
+    }
+
+    #month {
+        width: 15%;
+        float: left;
+    }
+
+    #year {
+        width: 15%;
+        float: left;
+    }
+
+    #backslash {
+        font-size: 220%;
+        color: grey;
+        top: 2px;
+        font-weight: 100;
+        float: left;
+        padding: 0px 5px;
+    }
+
+    #mastercard {
+        width: 17%;
+        top: 11px;
+        margin-left: 56px;
+    }
+
+    #visa {
+        width: 22%;
+        left: 1px;
+        top: 4px;
+    }
+
+    #cancel {
+        float: left;
+        width: 40%;
+        clear: left;
+        padding: 10px 20px;
+        margin: 8px 5% 0 0;
+        text-align: center;
+        background-color: darkred;
+    }
+
+    #cancel:hover {
+        background: rgb(211, 1, 1);
+    }
+
+    #black {
+        position: absolute;
+        left: -100%;
+        width: 2400px;
+        height: 2500px;
+        background-color: black;
+        opacity: 0;
+    }
+</style>
+
+<head>
+    <title>NorthKino</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body id="body">
+    <ul>
+        <li>
+            <a href="#logo" id="logo">
+                NorthKino
+            </a>
+        </li>
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Movies</a>
+            <div class="dropdown-content">
+                <a href="oulu.html" class="active">Oulu</a>
+                <a href="helsinki.html">Helsinki</a>
+                <a href="turku.html">Turku</a>
+                <a href="tampere.html">Tampere</a>
+                <a href="rovaniemi.html">Rovaniemi</a>
+            </div>
+        </li>
+        <li>
+            <a href="prices.html">Prices</a>
+        </li>
+    </ul>
+    <div id="box">
+        <div id="black"></div>
+        <p id="head">
+            Movies in
+            <strong>Oulu</strong> today
+        </p>
+        <div class="mov" id="test">
+            <div class="mov-whole">
+                <div class="mov-info">
+                    <img src="m7.jpg">
+                    <div class="text">
+                        <h2>Star Wars: The Last Jedi</h2>
+                        <p class="genre">FANTASY/SCIENCE FICTION</p>
+                        <p class="desc">
+                            Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her
+                            powers. Meanwhile, the Resistance prepares to do battle with the First Order.
+                        </p>
+                        <div class="btn">17:00</div>
+                        <div class="btn">19:00</div>
+                        <div class="btn">22:30</div>
+                    </div>
+                </div>
+                <div id="moved-node">
+                    <div id="confirm-node">
+                        <div id="confirm-title">Murder on the Orient Express</div>
+                        <div id="confirm-time">21:30</div>
+                        <div id="calculation">2 adults + 2 kids x 9 =
+                            <strong>144,00 €</strong>
+                        </div>
+                        <hr>
+                        <form>
+                            <label for="card-holder">CARD HOLDER</label>
+                            <input type="text" id="card-holder" name="card-holder">
+                            <div id="card-number-group">
+                                <label for="card-number">CARD NUMBER</label>
+                                <input type="text" id="card-number" name="card-number">
+                            </div>
+                            <div id="ccv-group">
+                                <label for="text">CCV</label>
+                                <input type="text" id="ccv" name="ccv">
+                            </div>
+                            <div id="expiration-group">
+                                <label for="month">EXPIRATION DATE</label>
+                                <div id="month-year-group">
+                                    <input type="text" id="month" name="ccv">
+                                    <div id="backslash">/</div>
+                                    <input type="text" id="year" name="ccv">
+                                    <img src="mastercard.png" class="card-img" id="mastercard">
+                                    <img src="visa.png" class="card-img" id="visa">
+                                </div>
+                            </div>
+                            <div class="btn" id="cancel" onclick="unextend()">Cancel</div>
+                            <input type="submit" value="Confirm" class="btn" id="confirm">
+                        </form>
+                    </div>
+                    <div id="pay-node">
+                        <div id="pay-info">
+                            <h2 id="pay-title">Murder on the Orient Express 12:00</h2>
+                            <div id="type">
+                                Type of ticket:
+                                <select id="seltype">
+                                    <option>Standard</option>
+                                    <option>Child</option>
+                                    <option>Senior</option>
+                                    <option>1 adult + 2 kids</option>
+                                    <option>2 adults + 1 kid</option>
+                                    <option>2 adults + 2 kids</option>
+                                </select>
+                            </div>
+                            <div id="number">
+                                Number of tickets:
+                                <select id="selnumber">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="buy-area">
+                            <div class="btn" id="buy" onclick="if (!confirmActive) extend(this);">Buy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mov">
+            <div class="mov-whole">
+                <div class="mov-info">
+                    <img src="m1.jpg">
+                    <div class="text">
+                        <h2>Murder on the Orient Express</h2>
+                        <p class="genre">MYSTERY/CRIME</p>
+                        <p class="desc">
+                            A lavish trip through Europe quickly unfolds into a race against time to solve a murder aboard a train. When an avalanche
+                            stops the Orient Express dead in its tracks, the world's greatest detective -- Hercule Poirot
+                            -- arrives to interrogate all passengers and search for clues before the killer can strike again.
+                        </p>
+                        <div class="btn">11:00</div>
+                        <div class="btn">16:00</div>
+                        <div class="btn">21:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mov">
+            <div class="mov-whole">
+                <div class="mov-info">
+                    <img src="m2.jpg">
+                    <div class="text">
+                        <h2>Jigsaw</h2>
+                        <p class="genre">MYSTERY/CRIME</p>
+                        <p class="desc">
+                            After a series of murders bearing all the markings of the Jigsaw killer, law enforcement officials find themselves chasing
+                            the ghost of a man who has been dead for over a decade, and they become embroiled in a new game
+                            that's only just begun. Is John Kramer back from the dead to remind the world to be grateful
+                            for the gift of life? Or is this a trap set by a killer with designs of his own?
+                        </p>
+                        <div class="btn">11:30</div>
+                        <div class="btn">16:30</div>
+                        <div class="btn">21:30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mov">
+            <div class="mov-whole">
+                <div class="mov-info">
+                    <img src="m3.jpg">
+                    <div class="text">
+                        <h2>Moomins and the Winter Wonderland</h2>
+                        <p class="genre">ANIMATION/FAMILY</p>
+                        <p class="desc">
+                            The winter seems extraordinary in Moomin Valley, so Moomintroll decides to stay awake instead of having his typical winter
+                            slumber. Moomintroll discovers that strange creatures wander amidst the snowdrifts in the midwinter
+                            darkness, and all of the new hints imply that an eccentric guest is soon to arrive. This new
+                            guest is called Christmas, and an astounded Moomintroll learns to experience the true meaning
+                            of this wonderful holiday.
+                        </p>
+                        <div class="btn">12:00</div>
+                        <div class="btn">17:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mov">
+            <div class="mov-whole">
+                <div class="mov-info">
+                    <img src="m4.jpg">
+                    <div class="text">
+                        <h2>The Foreigner</h2>
+                        <p class="genre">MYSTERY/CRIME</p>
+                        <p class="desc">
+                            Quan is a humble London businessman whose long-buried past erupts in a revenge-fueled vendetta when the only person left
+                            for him to love -- his teenage daughter -- dies in a senseless act of politically motivated terrorism.
+                            His relentless search to find the terrorists leads to a cat-and-mouse conflict with a British
+                            government official whose own past may hold the clues to the identities of the elusive killers.
+                        </p>
+                        <div class="btn">13:30</div>
+                        <div class="btn">18:30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mov">
+            <div class="mov-whole">
+                <div class="mov-info">
+                    <img src="m8.jpg">
+                    <div class="text">
+                        <h2>American Assassin</h2>
+                        <p class="genre">THRILLER/ACTION</p>
+                        <p class="desc">
+                            When Cold War veteran Stan Hurley takes CIA black ops recruit Mitch Rapp under his wing, they receive an assignment to investigate
+                            a wave of random attacks on both military and civilian targets. After discovering a pattern of
+                            violence, Hurley and Rapp join forces with a lethal Turkish agent to stop a mysterious operative
+                            who wants to start a global war.
+                        </p>
+                        <div class="btn">14:30</div>
+                        <div class="btn">19:30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="TweenMax.min.js.download"></script>
+<script>
+    window.onload = function () {
+        TweenLite.to(document.getElementById("head"), // element
+            .7,   // duration
+            {   // tween parameters
+                opacity: 1,
+                left: "0px"
+            });
+
+        TweenLite.from(document.querySelectorAll(".mov"), // elements
+            .5,   // duration
+            {    // tween parameters
+                scale: .5
+            });
+
+        TweenLite.to(document.querySelectorAll(".mov"), // elements
+            .5,   // duration
+            {    // tween parameters
+                opacity: 1
+            });
+
+    }
+
+    var boxNode = document.getElementById("box"),
+        buttons = document.getElementsByClassName("btn"),
+        lastButton = "",
+        payNode = document.getElementById("pay-node"), // dropdown content node
+        movedNode = document.getElementById("moved-node"),
+        style = window.getComputedStyle(payNode),
+        oldTop = style.getPropertyValue('top'),
+        newTop = oldTop.slice(0, -2) - - 120 + "px",
+        payTitle = document.getElementById("pay-title"),
+        selType = document.getElementById("seltype"),
+        selNumber = document.getElementById("selnumber"),
+        i,
+        l = buttons.length,
+        confirmActive = false;
+
+    for (i = 0; i < l; i++) {
+        if (buttons[i].id != "buy" && buttons[i].id != "cancel" && buttons[i].id != "confirm")
+            buttons[i].addEventListener("click", function () {
+                if (confirmActive)
+                    unextend()
+                dropDown(this);
+            });
+    }
+
+    function dropDown(x) {
+
+        var movieNode = x.parentNode.parentNode.parentNode.parentNode,
+            timeline = new TimelineMax();
+
+        // if last button pressed is pressed again, it will close the dropdown
+        if (x == lastButton) {
+            TweenLite.to(payNode, // element
+                .1,   // duration
+                {   // tween parameters
+                    top: oldTop
+                });
+            TweenLite.to(movieNode, // element
+                .1,   // duration
+                {   // tween parameters
+                    height: "340px"
+                });
+
+            lastButton.style.backgroundColor = "";
+            lastButton = "";
+            return;
+        }
+
+        // highlight the selected time
+        x.style.backgroundColor = "rgb(14, 99, 165)";
+
+        // remove highlight from the last selected time
+        if (lastButton != "")
+            lastButton.style.backgroundColor = "";
+
+        // animate the content of pay dropdown
+        timeline.add(TweenLite.to(payNode, .1, { top: oldTop }))
+            .add(TweenLite.to(payNode, .75, { top: newTop, ease: Bounce.easeOut }));
+
+        // animate height of old  movie box
+        TweenLite.to(payNode.parentNode.parentNode.parentNode, // element
+            .1,   // duration
+            {   // tween parameters
+                height: "340px",
+                onComplete: function () {
+
+                    // append the pay box to the selected movie box
+                    movieNode.childNodes[1].appendChild(movedNode);
+
+                    // place the movie title and time as the heading in the dropdown
+                    payTitle.innerHTML = x.parentNode.childNodes[1].innerHTML + " " +
+                        x.innerHTML;
+
+                    // reset the type and number of tickets to default selection
+                    selType.selectedIndex = "0";
+                    selNumber.selectedIndex = "0";
+                }
+            });
+
+        // animate height of new  movie box
+        TweenLite.to(movieNode, // element
+            .75,   // duration
+            {   // tween parameters
+                height: "455px",
+                ease: Bounce.easeOut,
+                delay: .1
+            });
+
+        lastButton = x;
+    }
+
+    var pricesBeforeFive = {
+        "Standard": 6.60,
+        "Child": 4.90,
+        "Senior": 4.50,
+        "1 adult + 2 kids": 15.50,
+        "2 adults + 1 kid": 19.60,
+        "2 adults + 2 kids": 16.00
+    },
+        pricesAfterFive = {
+            "Standard": 7.30,
+            "Child": 4.90,
+            "Senior": 4.50,
+            "1 adult + 2 kids": 16.20,
+            "2 adults + 1 kid": 20.60,
+            "2 adults + 2 kids": 17.50
+        };
+    function extend(x) {
+        confirmActive = true;
+        var confirmNode = document.getElementById("confirm-node"),
+            movieNode = confirmNode.parentNode.parentNode.parentNode;
+
+        x.style.backgroundColor = "rgb(0, 184, 0)";
+
+        document.getElementById("confirm-title").innerHTML =
+            document.getElementById("pay-title").innerHTML.slice(0, -5);
+
+        var time = document.getElementById("pay-title").innerHTML.slice(-5);
+        document.getElementById("confirm-time").innerHTML = time;
+
+        var total = 0,
+            type = document.getElementById("seltype").value,
+            number = document.getElementById("selnumber").value;
+
+        if ((time.slice(0, 2) < 17) ||
+            ((time.slice(0, 2) == "17") && (time.slice(3) == "00")))
+            total = (pricesBeforeFive[type] * number).toFixed(2).replace(".", ",");
+        else
+            total = (pricesAfterFive[type] * number).toFixed(2).replace(".", ",");
+
+        document.getElementById("calculation").innerHTML = type + " x " +
+            number + " = <strong>" + total + " €</strong>";
+
+        TweenLite.to(movieNode, // element
+            .75,   // duration
+            {   // tween parameters
+                width: "1100px"
+            });
+
+        TweenLite.to(confirmNode, // element
+            .75,   // duration
+            {   // tween parameters
+                left: "0x"
+            });
+
+        TweenLite.to(boxNode, // element
+            .75,   // duration
+            {   // tween parameters
+                left: "5%"
+            });
+
+        var black = document.getElementById("black");
+        black.style.zIndex = 1;
+
+        TweenLite.to(black, // element
+            .75,   // duration
+            {   // tween parameters
+                opacity: "0.5"
+            });
+
+        movieNode.style.zIndex = 2;
+
+    }
+
+    function unextend() {
+        confirmActive = false;
+        var confirmNode = document.getElementById("confirm-node"),
+            movieNode = confirmNode.parentNode.parentNode.parentNode;
+
+        document.getElementById("buy").style = "unset";
+
+        TweenLite.to(confirmNode, // element
+            .75,   // duration
+            {   // tween parameters
+                left: "-349.334px"
+            });
+
+        TweenLite.to(boxNode, // element
+            .75,   // duration
+            {   // tween parameters
+                left: "50%"
+            });
+
+        TweenLite.to(movieNode, // element
+            .75,   // duration
+            {   // tween parameters
+                width: "100%"
+            });
+
+        var black = document.getElementById("black");
+
+
+        TweenLite.to(black, // element
+            .75,   // duration
+            {   // tween parameters
+                opacity: "0",
+                onComplete: function () {
+                    black.style.zIndex = "unset";
+                    movieNode.style.zIndex = "unset";
+                }
+            });
+    }
+</script>
+
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<style>
+    * {
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    body {
+        font-family: sans-serif;
+        margin: 0;
+        background-color: #B82601;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+        position: unset;
+    }
+
+    li {
+        float: left;
+        position: unset;
+    }
+
+    li a,
+    .dropbtn {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: all .2s;
+    }
+
+    li a:hover:not(.active),
+    .dropdown:hover .dropbtn {
+        background-color: rgb(2, 26, 43);
+        transition: all .3s;
+    }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: block;
+        position: absolute;
+        background-color: black;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        top: -250px;
+        transition: top .5s;
+    }
+
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    li:not(.dropdown),
+    .dropbtn {
+        position: relative;
+        z-index: 2;
+        background-color: black;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+        top: 50px;
+    }
+
+    #logo {
+        font-weight: bold;
+    }
+
+    #logo:hover {
+        background-color: black;
+    }
+
+    .active {
+        background-color: #062F4F;
+    }
+
+    #box {
+        width: 80%;
+        margin: auto;
+    }
+
+    img {
+        float: left;
+        width: 12.5%;
+        height: 100%;
+    }
+
+    #img {
+        overflow: hidden;
+        width: 30%;
+        float: left;
+        opacity: 0;
+        left: -10%;
+    }
+
+    #car {
+        height: 450px;
+        width: 800%;
+        transition: left .6s ease-in-out;
+        left: 0%;
+    }
+
+    #text {
+        width: 45%;
+        float: left;
+        padding: 30px;
+        left: 200px;
+        opacity: 0;
+    }
+
+    #head {
+        opacity: 0;
+        left: -50px;
+        width: 25%;
+        overflow: hidden;
+        height: 50px;
+    }
+
+    #headInside {
+        top: 0px;
+        transition: top 1s;
+    }
+
+    .arrow {
+        width: 10%;
+        float: left;
+        font-size: 600%;
+        padding-top: 130px;
+        transition: color .2s ease-in-out;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .arrow:hover {
+        color: rgb(16, 109, 175);
+        transition: color .3s ease-in-out;
+    }
+
+    #left {
+        opacity: 0;
+        cursor: default;
+        left: 2%;
+    }
+
+    #right {
+        left: 200px;
+        opacity: 0;
+    }
+</style>
+
+<head>
+    <title>NorthKino</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body id="body">
+    <ul>
+        <li>
+            <a href="#logo" id="logo">
+                NorthKino
+            </a>
+        </li>
+        <li>
+            <a class="active" href="index.html">Home</a>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Movies</a>
+            <div class="dropdown-content">
+                <a href="oulu.html">Oulu</a>
+                <a href="helsinki.html">Helsinki</a>
+                <a href="turku.html">Turku</a>
+                <a href="tampere.html">Tampere</a>
+                <a href="rovaniemi.html">Rovaniemi</a>
+            </div>
+        </li>
+        <li>
+            <a href="prices.html">Prices</a>
+        </li>
+    </ul>
+    <div id="box">
+        <h1 id="head">
+            <div id="headInside">Current Movies Coming Soon</div>
+        </h1>
+        <hr>
+        <div class="arrow" id="left" onclick="if (position != 0) left()">
+            &#8249;
+        </div>
+        <div id="img">
+            <div id="car">
+                <img src="m1.jpg">
+                <img src="m2.jpg">
+                <img src="m3.jpg">
+                <img src="m4.jpg">
+                <img src="m5.png">
+                <img src="m6.jpg">
+                <img src="m9.jpg">
+                <img src="m10.jpg">
+            </div>
+        </div>
+        <div id="text">
+            <h2 id="movie-title">Murder on the Orient Express</h2>
+            <p id="movie-desc">
+                A lavish trip through Europe quickly unfolds into a race against time to solve a murder aboard a train. When an avalanche
+                stops the Orient Express dead in its tracks, the world's greatest detective -- Hercule Poirot -- arrives
+                to interrogate all passengers and search for clues before the killer can strike again.
+            </p>
+        </div>
+        <div class="arrow" id="right" onclick="if (position != 7) right()">
+            &#8250;
+        </div>
+    </div>
+</body>
+<script src="TweenMax.min.js.download"></script>
+<script>
+    window.onload = function () {
+        TweenLite.to(document.getElementById("text"), // element
+            .7,   // duration
+            {   // tween parameters
+                opacity: 1,
+                left: "0px",
+                delay: .2
+            });
+        TweenLite.to(document.getElementById("right"), // element
+            .7,   // duration
+            {   // tween parameters
+                opacity: 1,
+                left: "0px",
+                delay: .4
+            });
+        TweenLite.to(document.getElementById("img"), // element
+            .7,   // duration
+            {   // tween parameters
+                opacity: 1,
+                left: "0px",
+                delay: .1
+            });
+        TweenLite.to(document.getElementById("head"), // element
+            .7,   // duration
+            {   // tween parameters
+                opacity: 1,
+                left: "0px"
+            });
+    }
+    // array to store movie text
+    var movies = [];
+    /*
+    movies.push({
+        title: "",
+        text: ""
+    }); 
+    */
+    movies.push({
+        title: "Murder on the Orient Express",
+        text: "A lavish trip through Europe quickly unfolds into a race against time to solve a murder aboard a train. When an avalanche stops the Orient Express dead in its tracks, the world's greatet detective -- Hercule Poirot -- arrives to interrogate all passengers and search for clues before the killer can strike again."
+    });
+    movies.push({
+        title: "Jigsaw",
+        text: "After a series of murders bearing all the markings of the Jigsaw killer, law enforcement officials find themselves chasing the ghost of a man who has been dead for over a decade, and they become embroiled in a new game that's only just begun. Is John Kramer back from the dead to remind the world to be grateful for the gift of life? Or is this a trap set by a killer with designs of his own?"
+    });
+    movies.push({
+        title: "Moomins and the Winter Wonderland",
+        text: "The winter seems extraordinary in Moomin Valley, so Moomintroll decides to stay awake instead of having his typical winter slumber. Moomintroll discovers that strange creatures wander amidst the snowdrifts in the midwinter darkness, and all of the new hints imply that an eccentric guest is soon to arrive. This new guest is called Christmas, and an astounded Moomintroll learns to experience the true meaning of this wonderful holiday."
+    });
+    movies.push({
+        title: "The Foreigner",
+        text: "Quan is a humble London businessman whose long-buried past erupts in a revenge-fueled vendetta when the only person left for him to love -- his teenage daughter -- dies in a senseless act of politically motivated terrorism. His relentless search to find the terrorists leads to a cat-and-mouse conflict with a British government official whose own past may hold the clues to the identities of the elusive killers."
+    });
+    movies.push({
+        title: "Pitch Perfect 3",
+        text: "After the highs of winning the world championships, the Bellas find themselves split apart and discovering there aren't job prospects for making music with your mouth. But when they get the chance to reunite for an overseas USO tour, this group of awesome nerds will come together to make some music, and some questionable decisions, one last time."
+    });
+    movies.push({
+        title: "All the Money in the World",
+        text: "ALL THE MONEY IN THE WORLD follows the kidnapping of 16-year-old John Paul Getty III (Charlie Plummer) and the desperate attempt by his devoted mother Gail (Michelle Williams) to convince his billionaire grandfather (Christopher Plummer) to pay the ransom. When Getty Sr. refuses, Gail attempts to sway him as her son’s captors become increasingly volatile and brutal. With her son’s life in the balance, Gail and Getty’s advisor (Mark Wahlberg) become unlikely allies in the race against time that ultimately reveals the true and lasting value of love over money."
+    });
+    movies.push({
+        title: "The Post",
+        text: "Katharine Graham is the first female publisher of a major American newspaper -- The Washington Post. With help from editor Ben Bradlee, Graham races to catch up with The New York Times to expose a massive cover-up of government secrets that spans three decades and four U.S. presidents. Together, they must overcome their differences as they risk their careers -- and very freedom -- to help bring long-buried truths to light."
+    });
+    movies.push({
+        title: "Father Figures",
+        text: "Two brothers (Owen Wilson and Ed Helms) hit the road to find their long-lost dad after they learn that their mom has been lying to them about his death. This comedy was directed by Lawrence Sher."
+    });
+    
+
+    var position = 0,  // movie array position
+        carStyle = document.getElementById("car").style,
+        headInsideStyle = document.getElementById("headInside").style,
+        arrowLeft = document.getElementById("left"),
+        arrowRight = document.getElementById("right"),
+        text = document.getElementById("text"),
+        movieTitle = document.getElementById("movie-title"),
+        movieDesc = document.getElementById("movie-desc"),
+        movieCount = movies.length;
+
+    carStyle.left = "0%";
+    headInsideStyle.top = "0px";
+
+    function right() {
+        if (position == 0) {
+            TweenLite.to(arrowLeft, // element
+                1,   // duration
+                {   // tween parameters
+                    opacity: 1
+                });
+
+            arrowLeft.style.cursor = "pointer";
+        }
+        carStyle.left = carStyle.left.slice(0, -1) - 100 + "%";
+
+        if (position == 3) {
+            headInsideStyle.top = "-45px";
+        }
+
+
+        position++;
+        TweenLite.to(text, // element
+            .5,   // duration
+            {   // tween parameters
+                opacity: 0,
+                onCompleteParams: ["{self}"],
+                onComplete: function (a) {
+                    movieTitle.innerHTML = movies[position].title;
+                    movieDesc.innerHTML = movies[position].text;
+                }
+            });
+        TweenLite.to(text, // element
+            .5,   // duration
+            {   // tweens parameters
+                opacity: 1,
+                delay: .5
+            });
+
+        // if end of carousel reached, make the right arrow disappear
+        if (carStyle.left == "-" + (movieCount - 1) + "00%") {
+            TweenLite.to(arrowRight, // element
+                1,   // duration
+                {   // tween parameters
+                    opacity: 0
+                });
+
+            arrowRight.style.cursor = "default";
+        }
+
+
+    }
+
+    function left() {
+        if (position == 5) {
+            TweenLite.to(arrowRight, // element
+                1,   // duration
+                {   // tween parameters
+                    opacity: 1
+                });
+
+            arrowRight.style.cursor = "pointer";
+        }
+
+        if (position == 4) {
+            headInsideStyle.top = "0px";
+        }
+
+        carStyle.left = carStyle.left.slice(0, -1) - -100 + "%";
+        position--;
+        TweenLite.to(text, // element
+            .5,   // duration
+            {   // tween parameters
+                opacity: 0,
+                onCompleteParams: ["{self}"],
+                onComplete: function (a) {
+                    movieTitle.innerHTML = movies[position].title;
+                    movieDesc.innerHTML = movies[position].text;
+                }
+            });
+        TweenLite.to(text, // element
+            .5,   // duration
+            {   // tweens parameters
+                opacity: 1,
+                delay: .5
+            });
+
+        if (carStyle.left == "0%") {
+            TweenLite.to(arrowLeft, // element
+                1,   // duration
+                {   // tween parameters
+                    opacity: 0
+                });
+
+            arrowLeft.style.cursor = "default";
+        }
+
+    }
+</script>
+
+</html>
