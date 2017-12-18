@@ -401,6 +401,7 @@
         height: 2500px;
         background-color: black;
         opacity: 0;
+        transition: opacity .75s;
     }
 </style>
 
@@ -630,7 +631,7 @@
         lastButton = "",
         payNode = document.getElementById("pay-node"), // dropdown content node
         movedNode = document.getElementById("moved-node"),
-        confirmNode = document.getElementById("confirm-node"),  
+        confirmNode = document.getElementById("confirm-node"),
         payTitle = document.getElementById("pay-title"),
         selType = document.getElementById("seltype"),
         selNumber = document.getElementById("selnumber"),
@@ -759,6 +760,9 @@
             "2 adults + 1 kid": 20.60,
             "2 adults + 2 kids": 17.50
         };
+
+    black.style.opacity = 0;
+
     function extend(x) {
         confirmActive = true;
         var total,
@@ -799,13 +803,7 @@
             });
 
         black.style.zIndex = 1;
-
-        TweenLite.to(black, // element
-            .75,   // duration
-            {   // tween parameters
-                opacity: "0.5",
-                delay: .75
-            });
+        black.style.opacity = 0.5;
 
         movieNode.style.zIndex = 2;
 
@@ -835,16 +833,12 @@
                 width: "100%"
             });
 
-        TweenLite.to(black, // element
-            .75,   // duration
-            {   // tween parameters
-                opacity: "0",
-                delay: .75,
-                onComplete: function () {
-                    black.style.zIndex = "unset";
-                    movieNode.style.zIndex = "unset";
-                }
-            });
+        black.style.opacity = 0;
+
+        setTimeout(function () {
+            black.style.zIndex = "unset";
+            movieNode.style.zIndex = "unset";
+        }, 750);
     }
 </script>
 
