@@ -115,7 +115,7 @@
     }
 
     #car {
-        height: 450px;
+        height: 100%;
         width: 800%;
         transition: left .6s ease-in-out;
         left: 0%;
@@ -127,14 +127,20 @@
         padding: 30px;
         left: 200px;
         opacity: 0;
+        transition: opacity .5s;
+    }
+
+    body {
+        font-size: 100%;
     }
 
     #head {
         opacity: 0;
         left: -50px;
-        width: 25%;
+        width: 8em;
         overflow: hidden;
-        height: 50px;
+        height: 1.1em;
+        font-size: 2.5em;
     }
 
     #headInside {
@@ -161,17 +167,20 @@
         opacity: 0;
         cursor: default;
         left: 2%;
+        transition: opacity 1s;
     }
 
     #right {
         left: 200px;
         opacity: 0;
+        transition: opacity 1s;
     }
 </style>
 
 <head>
     <title>NorthKino</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body id="body">
@@ -237,17 +246,24 @@
         TweenLite.to(document.getElementById("text"), // element
             .7,   // duration
             {   // tween parameters
-                opacity: 1,
                 left: "0px",
                 delay: .2
             });
+        setTimeout(function () {
+            document.getElementById("text").style.opacity = 1;
+        }, 200);
+
         TweenLite.to(document.getElementById("right"), // element
             .7,   // duration
             {   // tween parameters
-                opacity: 1,
                 left: "0px",
                 delay: .4
             });
+
+        setTimeout(function () {
+            document.getElementById("right").style.opacity = 1;
+        }, 400);
+
         TweenLite.to(document.getElementById("img"), // element
             .7,   // duration
             {   // tween parameters
@@ -302,7 +318,7 @@
         title: "Father Figures",
         text: "Two brothers (Owen Wilson and Ed Helms) hit the road to find their long-lost dad after they learn that their mom has been lying to them about his death. This comedy was directed by Lawrence Sher."
     });
-    
+
 
     var position = 0,  // movie array position
         carStyle = document.getElementById("car").style,
@@ -319,61 +335,35 @@
 
     function right() {
         if (position == 0) {
-            TweenLite.to(arrowLeft, // element
-                1,   // duration
-                {   // tween parameters
-                    opacity: 1
-                });
-
+            arrowLeft.style.opacity = 1;
             arrowLeft.style.cursor = "pointer";
         }
         carStyle.left = carStyle.left.slice(0, -1) - 100 + "%";
 
         if (position == 3) {
-            headInsideStyle.top = "-45px";
+            headInsideStyle.top = "-1.6em";
         }
 
 
         position++;
-        TweenLite.to(text, // element
-            .5,   // duration
-            {   // tween parameters
-                opacity: 0,
-                onCompleteParams: ["{self}"],
-                onComplete: function (a) {
-                    movieTitle.innerHTML = movies[position].title;
-                    movieDesc.innerHTML = movies[position].text;
-                }
-            });
-        TweenLite.to(text, // element
-            .5,   // duration
-            {   // tweens parameters
-                opacity: 1,
-                delay: .5
-            });
+
+        text.style.opacity = 0;
+        setTimeout(function () {
+            movieTitle.innerHTML = movies[position].title;
+            movieDesc.innerHTML = movies[position].text;
+            text.style.opacity = 1;
+        }, 500);
 
         // if end of carousel reached, make the right arrow disappear
         if (carStyle.left == "-" + (movieCount - 1) + "00%") {
-            TweenLite.to(arrowRight, // element
-                1,   // duration
-                {   // tween parameters
-                    opacity: 0
-                });
-
+            arrowRight.style.opacity = 0;
             arrowRight.style.cursor = "default";
         }
-
-
     }
 
     function left() {
-        if (position == 5) {
-            TweenLite.to(arrowRight, // element
-                1,   // duration
-                {   // tween parameters
-                    opacity: 1
-                });
-
+        if (carStyle.left == "-" + (movieCount - 1) + "00%") {
+            arrowRight.style.opacity = 1;
             arrowRight.style.cursor = "pointer";
         }
 
@@ -382,31 +372,18 @@
         }
 
         carStyle.left = carStyle.left.slice(0, -1) - -100 + "%";
+
         position--;
-        TweenLite.to(text, // element
-            .5,   // duration
-            {   // tween parameters
-                opacity: 0,
-                onCompleteParams: ["{self}"],
-                onComplete: function (a) {
-                    movieTitle.innerHTML = movies[position].title;
-                    movieDesc.innerHTML = movies[position].text;
-                }
-            });
-        TweenLite.to(text, // element
-            .5,   // duration
-            {   // tweens parameters
-                opacity: 1,
-                delay: .5
-            });
+
+        text.style.opacity = 0;
+        setTimeout(function () {
+            movieTitle.innerHTML = movies[position].title;
+            movieDesc.innerHTML = movies[position].text;
+            text.style.opacity = 1;
+        }, 500);
 
         if (carStyle.left == "0%") {
-            TweenLite.to(arrowLeft, // element
-                1,   // duration
-                {   // tween parameters
-                    opacity: 0
-                });
-
+            arrowLeft.style.opacity = 0;
             arrowLeft.style.cursor = "default";
         }
 
